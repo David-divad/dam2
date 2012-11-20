@@ -1,0 +1,31 @@
+<resources>
+
+    <string name="app_name">Listas-E01</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Listas</string>
+    
+    <string-array name="distribuciones">
+    	<item>debian</item> 
+		<item>ubuntu</item> 
+		<item>mandrake</item> 
+		<item>redhat</item> 
+		<item>puppylinux</item> 
+		<item>suse</item> 
+		<item>backtrack</item> 
+		<item>oracle linux</item> 
+		<item>slackware</item> 
+    </string-array>
+    
+    <string-array name="anios">
+    	<item>1990</item> 
+		<item>2006</item> 
+		<item>1987</item> 
+		<item>1986</item> 
+		<item>2001</item> 
+		<item>1994</item> 
+		<item>2010</item> 
+		<item>2011</item> 
+		<item>1989</item> 
+    </string-array>
+
+</resources>

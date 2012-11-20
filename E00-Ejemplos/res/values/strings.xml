@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">E00-Ejemplos</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="boton_text">Un botón</string>
+    <string name="checkbox_text">Un checkbox</string>
+    <string name="textview_text">Un texto cualquiera</string>
+
+</resources>

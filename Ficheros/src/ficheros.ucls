@@ -1,0 +1,89 @@
+<class-diagram version="1.0.10" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="DatoMeteorologico" project="Ficheros" 
+    file="/Ficheros/src/DatoMeteorologico.java" binary="false">    
+    <position height="-1" width="-1" x="155" y="168"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="DistribucionPrecipitacionesEP02.MediaAcumulada" 
+    project="Ficheros" file="/Ficheros/src/DistribucionPrecipitacionesEP02.java" binary="false">    
+    <position height="-1" width="-1" x="1146" y="156"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="DistribucionPrecipitacionesEP02" project="Ficheros" 
+    file="/Ficheros/src/DistribucionPrecipitacionesEP02.java" binary="false">    
+    <position height="108" width="210" x="799" y="73"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="ErrorPrevisionEP03.ErrorPrevision" project="Ficheros" 
+    file="/Ficheros/src/ErrorPrevisionEP03.java" binary="false">    
+    <position height="-1" width="-1" x="141" y="662"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="ErrorPrevisionEP03" project="Ficheros" 
+    file="/Ficheros/src/ErrorPrevisionEP03.java" binary="false">    
+    <position height="-1" width="-1" x="150" y="472"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="LectorVSC.DatoVSC" project="Ficheros" 
+    file="/Ficheros/src/LectorVSC.java" binary="false">    
+    <position height="-1" width="-1" x="709" y="362"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="LectorVSC" project="Ficheros" 
+    file="/Ficheros/src/LectorVSC.java" binary="false">    
+    <position height="-1" width="-1" x="961" y="367"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="LeeTemperaturasEP01" project="Ficheros" 
+    file="/Ficheros/src/LeeTemperaturasEP01.java" binary="false">    
+    <position height="-1" width="-1" x="782" y="671"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <nesting id="9">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <nesting id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <nesting id="11">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <realization id="12">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Asteroides</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Asteroides</string>
+    <string name="boton_jugar">Jugar</string>
+    <string name="boton_configurar">Configurar</string>
+    <string name="boton_acerca">Acerca de</string>
+    <string name="boton_salir">Salir</string>
+    
+	<color name="negro">#000000</color>
+	<color name="blanco">#FFFFFF</color>
+</resources>

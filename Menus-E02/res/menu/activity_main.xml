@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_settings"
+        android:title="Archivo"
+        android:orderInCategory="100" >
+        <menu>
+            <item android:id="@+id/item1" android:title="Abrir"/>
+            <item android:id="@+id/item2" android:title="Guardar"/>
+            <item android:id="@+id/item3" android:title="Guardar como"/>
+        </menu>
+    </item>
+    <item android:id="@+id/item4" android:title="Efectos fuente">
+        <menu>
+            <item android:id="@+id/item5" android:checked="true" android:title="Cursiva" android:checkable="true"/>
+            <item android:id="@+id/item6" android:checked="false" android:title="Negrita" android:checkable="true"/>
+            <item android:id="@+id/item7" android:checked="false" android:title="Subrayado" android:checkable="true"/>
+        </menu>
+    </item>
+</menu>

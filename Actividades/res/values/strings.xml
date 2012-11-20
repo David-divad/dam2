@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">Actividades</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_acercaDe">Acerca de&#8230;</string>
+    <string name="title_activity_puntuar">Puntuanos&#8230;</string>
+    <string name="acerca_de">
+        Este programa ha sido desarrollado como ejemplo en el curso de 
+        Android para demostrar como se pueden lanzar nuevas actividades desde la actividad principal.
+    </string>
+    <string name="boton_puntua">Puntuanos</string>
+
+</resources>
