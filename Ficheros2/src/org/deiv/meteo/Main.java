@@ -37,8 +37,8 @@ public class Main {
 	
 	public static <T extends DatoMeteorologico>
 	boolean testEscribirFicheroObjetos(Class<T> clase, String fichero) throws IOException
-	{
-		String ficheroObj = "/home/deiv/observaciones." + clase.getSimpleName();
+	{ 
+		String ficheroObj = "/tmp/" + clase.getSimpleName();
 		FicheroDatos<T> datos = new FicheroDatos<T>(clase);
 		FicheroDatos<T> datosObj = new FicheroDatos<T>(clase);
 		

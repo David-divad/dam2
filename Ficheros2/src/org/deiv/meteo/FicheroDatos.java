@@ -49,22 +49,11 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 				dato = lector.leeLinea();
 			}
 
-		} catch (IOException e) {
-			System.err.format("error: imposible leer el fichero %s, posiblemente este dañado\n", fichero);
-			throw e;
-				
 		} catch (NumberFormatException e) {
-			System.err.format("error: imposible leer el fichero %s, formato incorrecto\n", fichero);
 			throw new FileFormatException();
 			
 		} finally {
-			try {
-				lector.close();
-				
-			} catch (IOException e) {
-				System.err.format("fatal: imposible cerrar el fichero %s\n", fichero);
-                throw e;
-			} 
+			lector.close();
 		}
 	}
 	
@@ -79,24 +68,9 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 				oos.writeObject(d);
 			}
 			
-		} catch (FileNotFoundException e) {
-			System.err.format("error: el fichero %s no existe\n", fichero);
-			return -1;
-			
-		} catch (IOException e) {
-			System.err.format("error: imposible leer el fichero %s, posiblemente este dañado\n", fichero);
-			return -2;
-			
 		} finally {
-			if (oos != null) {
-				try {
-					oos.close();
-
-				} catch (IOException e) {
-					System.err.format("fatal: imposible cerrar el fichero %s\n", fichero);
-	                throw e;
-				} 
-			}
+			if (oos != null) 
+				oos.close();
 		}
 		
 		return 0;
@@ -104,17 +78,7 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 
 	public int leeDesdeFicheroObj(String fichero) throws IOException
 	{
-		FileInputStream istream = null;
-		
-		try {
-			istream = new FileInputStream(fichero);
-			
-		} catch (FileNotFoundException e) {
-			System.err.format("error: el fichero %s no existe\n", fichero);
-			return -1;
-			
-		}
-		
+		FileInputStream istream = new FileInputStream(fichero);
 		ObjectInputStream ois = null;
 		
 		try {
@@ -131,31 +95,12 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 			
 			this.datos = datos;
 			
-		} catch (IOException e) {
-			System.err.format("error: imposible leer el fichero %s, posiblemente este dañado\n", fichero);
-			return -2;
-			
 		} catch (ClassNotFoundException e) {
-			System.err.format("error: imposible leer el fichero %s, datos inesperados\n", fichero);
-			return -2;
+			throw new FileFormatException();
 			
 		} finally {
-			try {
-				istream.close();
-			} catch (IOException e) {
-				System.err.format("fatal: imposible cerrar el fichero %s\n", fichero);
-                throw e;
-			} 
-
-			
-			if (ois != null) {
-				try {
-					ois.close();
-				} catch (IOException e) {
-					System.err.format("fatal: imposible cerrar el fichero %s\n", fichero);
-	                throw e;
-				} 
-			}
+			if (ois != null) 
+				ois.close(); 
 		}
 		
 		return 0;
