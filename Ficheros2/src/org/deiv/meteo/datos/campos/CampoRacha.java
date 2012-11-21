@@ -7,7 +7,7 @@ public class CampoRacha implements Serializable {
 	private static final long serialVersionUID = -6854383880525708378L;
 	
 	protected double velocidad = 0.0d;
-	protected String direccion = "";
+	protected double direccion = 0.0d;
 	
 	public double getVelocidad()
 	{
@@ -19,12 +19,12 @@ public class CampoRacha implements Serializable {
 		this.velocidad = velocidad;
 	}
 	
-	public String getDireccion()
+	public double getDireccion()
 	{
 		return direccion;
 	}
 	
-	public void setDireccion(String direccion)
+	public void setDireccion(double direccion)
 	{
 		this.direccion = direccion;
 	}
@@ -34,20 +34,22 @@ public class CampoRacha implements Serializable {
 		return String.format("CampoRacha [velocidad=%s, direccion=%s]",
 				velocidad, direccion);
 	}
-	
-	public int hashCode() 
+
+	public int hashCode()
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((direccion == null) ? 0 : direccion.hashCode());
 		long temp;
+		
+		temp = Double.doubleToLongBits(direccion);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(velocidad);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		
 		return result;
 	}
 
-	public boolean equals(Object obj)
+	public boolean equals(Object obj) 
 	{
 		if (this == obj)
 			return true;
@@ -57,10 +59,8 @@ public class CampoRacha implements Serializable {
 			return false;
 		
 		CampoRacha other = (CampoRacha) obj;
-		if (direccion == null) {
-			if (other.direccion != null)
-				return false;
-		} else if (!direccion.equals(other.direccion))
+		if (Double.doubleToLongBits(direccion) != Double
+				.doubleToLongBits(other.direccion))
 			return false;
 		if (Double.doubleToLongBits(velocidad) != Double
 				.doubleToLongBits(other.velocidad))
@@ -68,4 +68,6 @@ public class CampoRacha implements Serializable {
 		
 		return true;
 	}
+	
+
 }

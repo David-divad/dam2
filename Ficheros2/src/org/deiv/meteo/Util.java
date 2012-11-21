@@ -2,12 +2,12 @@ package org.deiv.meteo;
 
 public class Util {
 
-	private static final double KELVIN_TO_CELSIUS = 273.15d;
+	private static final double KELVIN_A_CELSIUS = 273.15d;
 	
 	/*  Cº = K - 273,15 */
 	public static final double kelvinACelsius(double kelvin)
 	{
-		return kelvin - KELVIN_TO_CELSIUS;
+		return kelvin - KELVIN_A_CELSIUS;
 	}
 	
 	public static final double calculaDireccion(String direccion)
@@ -42,4 +42,15 @@ public class Util {
 		
 		return -360.0d;
 	}
+	
+	public static final double kmhAms(double kmh)
+	{
+		return (kmh * 1000.0d) / 3600.0d;
+	}
+	
+	public static final double tantox100Atantox1(double x100)
+	{
+		return x100 / 100.0d;
+	}
+	
 }

@@ -37,15 +37,15 @@ public class DatoObservacion extends DatoMeteorologico implements Serializable {
 		precipitacion = Float.parseFloat(campos.get(Encabezados.PRECIPITACION));
 		presion       = Float.parseFloat(campos.get(Encabezados.PRESION));
 		tendencia     = Float.parseFloat(campos.get(Encabezados.TENDENCIA));
-		humedad       = Float.parseFloat(campos.get(Encabezados.HUMEDAD));
+		humedad       = Util.tantox100Atantox1(Float.parseFloat(campos.get(Encabezados.HUMEDAD)));
 		windchill     = Float.parseFloat(campos.get(Encabezados.WINDCHILL));
 		confort       = Float.parseFloat(campos.get(Encabezados.CONFORT));
 		
 		viento.setDireccion(Util.calculaDireccion(campos.get(Encabezados.DIRECCION_VIENTO)));
-		viento.setVelocidad(Float.parseFloat(campos.get(Encabezados.VELOCIDAD_VIENTO)));
+		viento.setVelocidad(Util.kmhAms(Float.parseFloat(campos.get(Encabezados.VELOCIDAD_VIENTO))));
 		
-		racha.setDireccion(campos.get(Encabezados.DIRECCION_RACHA));
-		racha.setVelocidad(Float.parseFloat(campos.get(Encabezados.RACHA)));
+		racha.setDireccion(Util.calculaDireccion(campos.get(Encabezados.DIRECCION_RACHA)));
+		racha.setVelocidad(Util.kmhAms(Float.parseFloat(campos.get(Encabezados.RACHA))));
 	}
 	
 	

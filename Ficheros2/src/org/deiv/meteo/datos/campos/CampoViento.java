@@ -6,6 +6,7 @@ public class CampoViento implements Serializable {
 
 	private static final long serialVersionUID = 2573851117856836938L;
 	
+	/* m/s */
 	protected double velocidad = 0.0d;
 	protected double direccion = 0.0d;
 	

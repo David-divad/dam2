@@ -52,7 +52,7 @@ public class Main {
 		/* los leemos desde ese nuevo fichero... */
 		datosObj.leeDesdeFicheroObj(ficheroObj);
 		
-		//System.out.println(datosObj.toString());
+		System.out.println(datosObj.toString());
 		
 		/* y comparamos que tengan los mismos elementos. */
 		return testContienenMismosElementos(datos, datosObj);

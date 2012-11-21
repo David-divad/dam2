@@ -16,10 +16,6 @@ public class DatoPrevision12Km extends DatoPrevision4Km implements Serializable 
 
 	}
 	
-	/* 
-	 * No usamos el metodo hijo para los campos, cada clase es resposable propia
-	 * de la organización de sus campos.
-	 */
 	public void mapeaCampos(ArrayList<String> campos)
 	{
 		mapeaFechaHora(campos.get(Encabezados.FECHAHORA));
