@@ -12,11 +12,13 @@ public class Main {
 
 	public static void main(String[] args)
 	{
+		String cwd =  System.getProperty("user.dir");
+	
 		try {
-			testEscribirFicheroObjetos(DatoObservacion.class, "/home/deiv/clase/workspace/Ficheros/validacioneswfroviedo - OVDMar2012.txt");
-			testEscribirFicheroObjetos(DatoPrevision4Km.class, "/home/deiv/WRF_04km_OVD_RUN_2012-03-07T00 00 00Z.txt");
-			testEscribirFicheroObjetos(DatoPrevision4Km.class, "/home/deiv/WRF_04km_OVD_RUN_2012-03-07T12 00 00Z.txt");
-			testEscribirFicheroObjetos(DatoPrevision12Km.class, "/home/deiv/WRF_12km_OVD_RUN_2012-03-07T12 00 00Z.txt");	
+			testEscribirFicheroObjetos(DatoObservacion.class, cwd + "/validacioneswfroviedo - OVDMar2012.txt");
+			testEscribirFicheroObjetos(DatoPrevision4Km.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T00 00 00Z.txt");
+			testEscribirFicheroObjetos(DatoPrevision4Km.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T12 00 00Z.txt");
+			testEscribirFicheroObjetos(DatoPrevision12Km.class, cwd + "/WRF_12km_OVD_RUN_2012-03-07T12 00 00Z.txt");	
 			
 			System.out.println("todos los tests OK");
 			
