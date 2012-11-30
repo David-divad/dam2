@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.deiv.contactos;
 
 import org.deiv.contactos.db.AdaptadorBD;
@@ -13,10 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * @author deiv
- *
- */
 public class DialogoContacto extends Activity implements OnClickListener {
 	
 	TextView textNombre;

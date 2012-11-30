@@ -18,22 +18,30 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="¿Eliminar?" />
 
-    <Button
-        android:id="@+id/buttonEliminarOk"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ok" />
+        android:gravity="center_horizontal" >
 
-    <Button
-        android:id="@+id/buttonEliminarCancelar"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar" />
+        <Button
+            android:id="@+id/buttonEliminarOk"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ok" />
+
+        <Button
+            android:id="@+id/buttonEliminarCancelar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+    </LinearLayout>
 
 </LinearLayout>
