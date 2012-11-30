@@ -5,15 +5,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.deiv.contactos.R;
-
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class Adaptador {
+import org.deiv.contactos.R;
+
+public class AdaptadorBD {
 	
 	static protected final String BBDD_NOMBRE = "contactos.db";
 	static protected final int    BBDD_VERSION = 1;
@@ -29,14 +30,18 @@ public class Adaptador {
 	ConectorBBDD conector;
 	private SQLiteDatabase db;
 	
-	public Adaptador(Context context)
+	public AdaptadorBD(Context context)
 	{
 		String bbddPath = String.format("/data/data/%s/databases/%s", 
 				context.getPackageName(), 
 				BBDD_NOMBRE);
 		File dbFile = new File(bbddPath);
-		//dbFile.delete();
-		importaDesdeRecursos(context, R.raw.dbcontactos, bbddPath);
+		
+		if (!dbFile.exists()) {
+			dbFile.mkdirs();
+			importaDesdeRecursos(context, R.raw.dbcontactos, bbddPath);
+		}
+
 		conector = new ConectorBBDD(context);
 	}
 	
@@ -66,6 +71,53 @@ public class Adaptador {
 		
 		return cursor;
  	}
+	
+	public Cursor getContacto(long idContacto)
+	{
+		String[] cols = {"_id", "nombre", "email"};
+		String[] args = {String.valueOf(idContacto)};
+		
+		Cursor cursor = db.query(TABLA_CONTACTOS, 
+				cols, 
+				"_id=?" /*selection*/, 
+				args /*selectionArgs*/, 
+				null /*groupBy*/, 
+				null /*having*/, 
+				"nombre DESC" /*orderBy*/, 
+				null/*limit*/
+		);
+		
+		return cursor;
+ 	}
+	
+	public void editaContacto(long idContacto, String nombre, String email)
+	{
+		ContentValues valores = new ContentValues();
+		String[] whereArgs = {String.valueOf(idContacto)};
+
+		valores.put("nombre", nombre);
+		valores.put("email", email);
+		
+		db.update(TABLA_CONTACTOS, valores, "_id=?", whereArgs);
+ 	}
+	
+	public void eliminaContacto(long idContacto)
+	{
+		String[] whereArgs = {String.valueOf(idContacto)};
+		
+		db.delete(TABLA_CONTACTOS, "_id=?", whereArgs);
+ 	}
+	
+	public void insertaContacto(String nombre, String email)
+	{
+		ContentValues nuevoRegistro = new ContentValues();
+		
+		nuevoRegistro.put("nombre", nombre);
+		nuevoRegistro.put("email", email);
+		
+		db.insert(TABLA_CONTACTOS, null, nuevoRegistro);
+ 	}
+	
 	
 	public void importaDesdeRecursos(Context context, int resourceId, String destino)
 	{
@@ -112,19 +164,8 @@ public class Adaptador {
 
 		@Override
 		public void onCreate(SQLiteDatabase db)
-		{
-			//db.execSQL(BBDD_DDL_CREATEBBDD);
-			
-			String bbddPath = String.format("/data/data/%s/databases/%s", 
-					context.getPackageName(), 
-					BBDD_NOMBRE);
-			
-			File dbFile = new File(bbddPath);
-			
-			//if (dbFile.exists()) {
-				
-				//importaDesdeRecursos(R.raw.dbcontactos, bbddPath);
-			//}
+		{			
+			db.execSQL(BBDD_DDL_CREATEBBDD);
 		}
 
 		@Override
