@@ -41,10 +41,12 @@ public class CampoViento implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		long temp;
+		
 		temp = Double.doubleToLongBits(direccion);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(velocidad);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		
 		return result;
 	}
 	

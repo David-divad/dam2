@@ -38,7 +38,7 @@ public class Main {
 	public static <T extends DatoMeteorologico>
 	boolean testEscribirFicheroObjetos(Class<T> clase, String fichero) throws IOException
 	{ 
-		String ficheroObj = "/tmp/" + clase.getSimpleName();
+		String ficheroObj = System.getProperty("user.dir") + "/" + clase.getSimpleName();
 		FicheroDatos<T> datos = new FicheroDatos<T>(clase);
 		FicheroDatos<T> datosObj = new FicheroDatos<T>(clase);
 		
@@ -60,7 +60,7 @@ public class Main {
 		return testContienenMismosElementos(datos, datosObj);
 	}
 	
-	public static <T extends DatoMeteorologico>
+	/*public static <T extends DatoMeteorologico>
 	FicheroDatos<T> leeFichero(Class<T> clase, String fichero)
 	{
 		FicheroDatos<T> datos = new FicheroDatos<T>(clase);
@@ -73,7 +73,7 @@ public class Main {
 		}
 		
 		return datos;
-	}
+	}*/
 	
 	public static <T extends DatoMeteorologico>
 	boolean testContienenMismosElementos(FicheroDatos<T> f1, FicheroDatos<T> f2)
