@@ -17,4 +17,8 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="DialogoContacto" parent="android:style/Theme.Dialog">
+    	<item name="android:layout_width">1000dp</item>
+	</style>
+
 </resources>

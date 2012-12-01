@@ -12,6 +12,6 @@
             </intent-filter>
         </activity>
         <!--created by deiv at 2012-11-29 03:03:26-->
-        <activity android:name=".DialogoContacto" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".DialogoContacto" android:theme="@style/DialogoContacto"/>
     </application>
 </manifest>

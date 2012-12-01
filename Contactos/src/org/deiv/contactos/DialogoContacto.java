@@ -16,9 +16,9 @@ public class DialogoContacto extends Activity implements OnClickListener {
 	TextView textEmail;
 	Button botonSalvar;
 	Button botonCancelar;
+	
 	long idContacto;
 	String accion;
-	
 	AdaptadorBD db;
 	
     @Override
@@ -30,32 +30,7 @@ public class DialogoContacto extends Activity implements OnClickListener {
         
         accion = getIntent().getAction();
         
-        if (accion.contentEquals("editar")) {
-        	
-        	idContacto = getIntent().getLongExtra("idContacto", -1);
-        	
-        	if (idContacto == -1) {
-        		throw new RuntimeException("Error interno");
-        	}
-        	
-            setContentView(R.layout.editar_contacto);
-       	
-            textNombre = (TextView) findViewById(R.id.editTextNombre);
-            textEmail = (TextView) findViewById(R.id.editTextEmail);
-            botonSalvar = (Button) findViewById(R.id.botonGuardar);
-            
-            botonSalvar.setOnClickListener(this);
-        	
-        	db.abrir();
-        	Cursor c = db.getContacto(idContacto);		
-        	c.moveToFirst();
-        	
-        	textNombre.setText(c.getString(1));
-        	textEmail.setText(c.getString(2));
-        	
-        	db.cerrar();
-        	
-        } else if (accion.contentEquals("eliminar")) {
+        if (accion.contentEquals("eliminar")) {
         	
         	idContacto = getIntent().getLongExtra("idContacto", -1);
         	
@@ -81,19 +56,44 @@ public class DialogoContacto extends Activity implements OnClickListener {
         	textEmail.setText(c.getString(2));
         	
         	db.cerrar();
-        } else if (accion.contentEquals("crear")) {
-        	
-            setContentView(R.layout.crear_contacto);
+        } else {
+        	/* 
+        	 * crear y editar comparten el mismo layout 
+        	 */
+            setContentView(R.layout.editarocrear_contacto);
        	
             textNombre = (TextView) findViewById(R.id.editTextNombre);
             textEmail = (TextView) findViewById(R.id.editTextEmail);
             botonSalvar = (Button) findViewById(R.id.botonGuardar);
+            botonCancelar = (Button) findViewById(R.id.botonCancelar);
             
             botonSalvar.setOnClickListener(this);
+            botonCancelar.setOnClickListener(this);
+            
+            /* si estamos editando rellenamos los datos originales */
+            if (accion.contentEquals("editar")) {
+            	
+            	idContacto = getIntent().getLongExtra("idContacto", -1);
+            	
+            	if (idContacto == -1) {
+            		throw new RuntimeException("Error interno");
+            	}
+            	
+            	db.abrir();
+            	Cursor c = db.getContacto(idContacto);		
+            	c.moveToFirst();
+            	
+            	textNombre.setText(c.getString(1));
+            	textEmail.setText(c.getString(2));
+            	
+            	db.cerrar();
+            }
         }
+        
+        this.setTitle(accion + " contacto");
     }
     
-    public void salir()
+    public final void salir()
     {
     	setResult(RESULT_OK);
     	
@@ -109,6 +109,7 @@ public class DialogoContacto extends Activity implements OnClickListener {
 					db.abrir();
 					db.editaContacto(idContacto, textNombre.getText().toString(), textEmail.getText().toString());
 					db.cerrar();
+					
 				} else if (accion.contentEquals("crear")) {
 					db.abrir();
 					db.insertaContacto(textNombre.getText().toString(), textEmail.getText().toString());
@@ -127,6 +128,7 @@ public class DialogoContacto extends Activity implements OnClickListener {
 				break;
 				
 			case R.id.buttonEliminarCancelar:
+			case R.id.botonCancelar:
 		    	setResult(RESULT_CANCELED);
 		    	
 		    	finish();
