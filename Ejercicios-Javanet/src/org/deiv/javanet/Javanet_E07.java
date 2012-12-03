@@ -11,7 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /*
- * 6 - Programa en Java que recibe como argumento la URL de un objeto (grafico, imagen, audio)
+ * 7 - Programa en Java que recibe como argumento la URL de un objeto (grafico, imagen, audio)
  *     y lo guarda en un fichero.
  */
 public class Javanet_E07 {

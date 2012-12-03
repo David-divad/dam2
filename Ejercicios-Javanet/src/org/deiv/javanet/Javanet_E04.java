@@ -22,8 +22,12 @@ public class Javanet_E04 {
 		try {
 			url = new URL(args[0]);
 			
-			System.out.format("Atributos de la URL: host: %s, path: %s, port: %s, ref: %s\n",
-					url.getHost(), url.getFile(), url.getPort(), url.getRef());
+			System.out.format("Atributos de la URL: %s\n", args[0]);
+			System.out.format("protocolo: %s\n", url.getProtocol());
+			System.out.format("host: %s\n", url.getHost());
+			System.out.format("puerto: %s\n", url.getPort());
+			System.out.format("ruta: %s\n", url.getPath());
+			System.out.format("attr: %s\n", url.getQuery());
 			
 		} catch (MalformedURLException e) {
 			System.err.format("La Url %s, esta mal formada\n", args[0]);
