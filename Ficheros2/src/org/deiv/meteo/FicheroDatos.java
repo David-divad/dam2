@@ -1,42 +1,61 @@
 package org.deiv.meteo;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import org.deiv.meteo.colecciones.Coleccion;
 import org.deiv.meteo.datos.DatoMeteorologico;
+import org.deiv.meteo.discriminadores.Discriminador;
+import org.deiv.meteo.util.Reflexion;
 
-public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
-	
+/**
+ * 
+ * @param <T> Tipo de dato
+ * @param <C> Tipo de colección que almacena los datos
+ */
+public class FicheroDatos
+  <T extends DatoMeteorologico, C extends Coleccion<T>> 
+  implements Serializable {
+
 	private static final long serialVersionUID = -1915370548748319647L;
 	
 	protected Class<T> claseDato;
-	Map<Date, T> datos = new TreeMap<Date, T>();
+	protected Class<? extends Coleccion> claseAlmacenamiento;
+	protected C datos;
 	
-	public FicheroDatos(Class<T> claseDato)
+	public FicheroDatos(Class<T> claseDato, Class<? extends Coleccion> claseAlmacenamiento)
 	{
 		this.claseDato = claseDato;
-	}
-	
-	public Map<Date, T> getDatos()
-	{
-		return datos;
+		this.claseAlmacenamiento = claseAlmacenamiento;
+		
+		datos = (C) Reflexion.nuevaInstancia(claseAlmacenamiento);
 	}
 
 	public void leeDesdeFicheroVSC(String fichero, boolean tieneEncabezado) 
 	throws FileFormatException, FileNotFoundException, IOException
 	{
-		LectorVSC<T> lector = null;
-		
-		lector = new LectorVSC<T>(fichero, claseDato);
+		BufferedReader flujo = new BufferedReader(new FileReader(fichero));
 
+		try {
+			leeDesdeFicheroVSC(flujo, tieneEncabezado);
+
+		} finally {
+			flujo.close();
+		}
+	}
+	
+	public void leeDesdeFicheroVSC(LectorVSC<T> lector, boolean tieneEncabezado) 
+	throws FileFormatException, FileNotFoundException, IOException
+	{
 		try {
 			/* saltamos el encabezado */
 			if (tieneEncabezado)
@@ -45,16 +64,21 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 			T dato = lector.leeLinea();
 			
 			while (dato != null) {
-				datos.put(dato.getFechaHora(), dato);
+				datos.añadir(dato);
 				dato = lector.leeLinea();
 			}
 
 		} catch (NumberFormatException e) {
-			throw new FileFormatException();
-			
-		} finally {
-			lector.close();
+			throw new FileFormatException(e);
 		}
+	}
+	
+	public void leeDesdeFicheroVSC(BufferedReader flujo, boolean tieneEncabezado) 
+	throws FileFormatException, FileNotFoundException, IOException
+	{
+		LectorVSC<T> lector = new LectorVSC<T>(flujo, claseDato);
+
+		leeDesdeFicheroVSC(lector, tieneEncabezado);
 	}
 	
 	public int escribeAFicheroObj(String fichero) throws IOException
@@ -64,7 +88,7 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(fichero));
 			
-			for (T d : datos.values()) {
+			for (T d : datos.obtenTodos()) {
 				oos.writeObject(d);
 			}
 			
@@ -85,18 +109,19 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 
 			ois = new ObjectInputStream(istream);
 			
-			TreeMap<Date, T> datos = new TreeMap<Date, T>();
+			C datos = (C) Reflexion.nuevaInstancia(claseAlmacenamiento);
+			
 			T dato = null;
 
 			while (istream.available() > 0) {
 				dato = (T) ois.readObject();
-				datos.put(dato.getFechaHora(), dato);
+				datos.añadir(dato);
 			}
 			
 			this.datos = datos;
 			
 		} catch (ClassNotFoundException e) {
-			throw new FileFormatException();
+			throw new FileFormatException(e);
 			
 		} finally {
 			if (ois != null) 
@@ -106,20 +131,42 @@ public class FicheroDatos<T extends DatoMeteorologico> implements Serializable {
 		return 0;
 	}
 	
+	
+	public void discrimina(Discriminador<T> discriminador) 
+	throws FileFormatException, FileNotFoundException, IOException
+	{
+		ArrayList<T> noDiscriminados = new ArrayList<T>();
+		
+		/* Creamos una lista con los datos a eliminar, ... */
+		for (T dato : datos.obtenTodos()) {
+			if (!discriminador.discrimina(dato))
+				noDiscriminados.add(dato);
+		}
+		
+		/* ... para hacerlo despues de recorrer la coleccion, evitando problemas de concurrencia */
+		for (T dato : noDiscriminados) {
+			datos.eliminar(dato);
+		}
+	}
+	
+	public Collection<T> getDatos()
+	{
+		return datos.obtenTodos();
+	}
+	
+	public C obtenAlmacen()
+	{
+		return datos;
+	}
+	
 	public String toString()
 	{
 		String r = new String();
 		
-		for (T d : datos.values()) {
+		for (T d : datos.obtenTodos()) {
 			r += d.toString() + "\n";
 		}
 		
 		return r;
 	}
-	
-}
-
-class FileFormatException extends java.io.IOException {
-
-	private static final long serialVersionUID = 4550277946412885951L;	
 }

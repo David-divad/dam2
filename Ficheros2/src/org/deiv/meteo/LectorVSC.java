@@ -1,15 +1,23 @@
 package org.deiv.meteo;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import org.deiv.meteo.util.Reflexion;
+
+/**
+ *
+ * Lector de archivos CSV.
+ *
+ * @param <T> Tipo de dato que manejamos
+ */
 public class LectorVSC<T extends LectorVSC.DatoVSC> {
 	
-	private final String DELIMITADORES = ",";
+	static protected final String DELIMITADORES = ",";
 	protected BufferedReader lector;
 	Class<T> tipoDato;
 	
@@ -48,31 +56,26 @@ public class LectorVSC<T extends LectorVSC.DatoVSC> {
 		if (linea == null)
 			return null;
 		
+		ArrayList<String> campos = troceaLinea(linea);
+		
+		return mapeaLinea(campos);
+	}
+	
+	protected ArrayList<String> troceaLinea(String linea)
+	{
 		StringTokenizer st = new StringTokenizer(linea, DELIMITADORES);
 		ArrayList<String> campos = new ArrayList<String>();
 		
 		while (st.hasMoreTokens()) {
-			campos.add(st.nextToken());
+			campos.add(st.nextToken().trim());
 		}
 				
-		return mapeaLinea(campos);
+		return campos;
 	}
 	
 	protected T mapeaLinea(ArrayList<String> campos)
 	{
-		T dato;
-
-		try {
-			Constructor<T> ctor = tipoDato.getConstructor();
-			dato = ctor.newInstance();
-			 
-		} catch (Exception e) {
-			/* 
-             * Imposible recuperarse.
-             * La encapsulamos como RuntimeException para evitar manejarla. 
-             */
-			throw new RuntimeException(e);
-		}
+		T dato = Reflexion.nuevaInstancia(tipoDato);
 		
 		dato.mapeaCampos(campos);
 		

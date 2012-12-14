@@ -5,12 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.deiv.meteo.Util;
 import org.deiv.meteo.datos.campos.CampoRacha;
 import org.deiv.meteo.datos.campos.CampoViento;
 
 
-public class DatoObservacion extends DatoMeteorologico implements Serializable {
+public class DatoObservacion extends DatoMeteorologicoConFecha implements Serializable {
 	
 	private static final long serialVersionUID = 612981911538235809L;
 	

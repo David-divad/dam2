@@ -1,24 +1,28 @@
-package org.deiv.meteo;
+package org.deiv.meteo.app;
 
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.deiv.meteo.FicheroDatos;
+import org.deiv.meteo.FileFormatException;
+import org.deiv.meteo.colecciones.MapaOrdenacionFecha;
+import org.deiv.meteo.colecciones.Coleccion;
 import org.deiv.meteo.datos.DatoMeteorologico;
 import org.deiv.meteo.datos.DatoObservacion;
 import org.deiv.meteo.datos.DatoPrevision12Km;
 import org.deiv.meteo.datos.DatoPrevision4Km;
 
-public class Main {
+public class Test {
 
 	public static void main(String[] args)
 	{
 		String cwd =  System.getProperty("user.dir");
 	
 		try {
-			testEscribirFicheroObjetos(DatoObservacion.class, cwd + "/validacioneswfroviedo - OVDMar2012.txt");
-			testEscribirFicheroObjetos(DatoPrevision4Km.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T00 00 00Z.txt");
-			testEscribirFicheroObjetos(DatoPrevision4Km.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T12 00 00Z.txt");
-			testEscribirFicheroObjetos(DatoPrevision12Km.class, cwd + "/WRF_12km_OVD_RUN_2012-03-07T12 00 00Z.txt");	
+			testEscribirFicheroObjetos(DatoObservacion.class, MapaOrdenacionFecha.class, cwd + "/validacioneswfroviedo - OVDMar2012.txt");
+			testEscribirFicheroObjetos(DatoPrevision4Km.class, MapaOrdenacionFecha.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T00 00 00Z.txt");
+			testEscribirFicheroObjetos(DatoPrevision4Km.class, MapaOrdenacionFecha.class, cwd + "/WRF_04km_OVD_RUN_2012-03-07T12 00 00Z.txt");
+			testEscribirFicheroObjetos(DatoPrevision12Km.class, MapaOrdenacionFecha.class, cwd + "/WRF_12km_OVD_RUN_2012-03-07T12 00 00Z.txt");	
 			
 			System.out.println("todos los tests OK");
 			
@@ -35,15 +39,16 @@ public class Main {
 		}
 	}
 	
-	public static <T extends DatoMeteorologico>
-	boolean testEscribirFicheroObjetos(Class<T> clase, String fichero) throws IOException
+	public static <T extends DatoMeteorologico, A extends Coleccion<T>>
+	boolean testEscribirFicheroObjetos(Class<T> claseT, Class<A> claseA, String fichero)
+	throws IOException
 	{ 
-		String ficheroObj = System.getProperty("user.dir") + "/" + clase.getSimpleName();
-		FicheroDatos<T> datos = new FicheroDatos<T>(clase);
-		FicheroDatos<T> datosObj = new FicheroDatos<T>(clase);
+		String ficheroObj = System.getProperty("user.dir") + "/" + claseT.getSimpleName();
+		FicheroDatos<T, A> datos = new FicheroDatos<T, A>(claseT, claseA);
+		FicheroDatos<T, A> datosObj = new FicheroDatos<T, A>(claseT, claseA);
 		
 		System.out.format("analizando el fichero %s que debe contener %s\n", 
-				fichero, clase.getSimpleName());
+				fichero, claseT.getSimpleName());
 		
 		/* Leemos los datos del fichero VSC... */
 		datos.leeDesdeFicheroVSC(fichero, true);
@@ -60,26 +65,11 @@ public class Main {
 		return testContienenMismosElementos(datos, datosObj);
 	}
 	
-	/*public static <T extends DatoMeteorologico>
-	FicheroDatos<T> leeFichero(Class<T> clase, String fichero)
+	public static <T extends DatoMeteorologico, A extends Coleccion<T>>
+	boolean testContienenMismosElementos(FicheroDatos<T, A> f1, FicheroDatos<T, A> f2)
 	{
-		FicheroDatos<T> datos = new FicheroDatos<T>(clase);
-		
-		try {
-			datos.leeDesdeFicheroVSC(fichero, true);
-			
-		} catch (IOException e) {
-			System.err.format("Error: no se puede leer el archivo %s\n", fichero);
-		}
-		
-		return datos;
-	}*/
-	
-	public static <T extends DatoMeteorologico>
-	boolean testContienenMismosElementos(FicheroDatos<T> f1, FicheroDatos<T> f2)
-	{
-		Iterator<T> datos1 = f1.getDatos().values().iterator();
-		Iterator<T> datos2 = f2.getDatos().values().iterator();
+		Iterator<T> datos1 = f1.getDatos().iterator();
+		Iterator<T> datos2 = f2.getDatos().iterator();
 		
 		while (datos1.hasNext()) {
 			

@@ -1,6 +1,6 @@
-package org.deiv.meteo;
+package org.deiv.meteo.datos;
 
-public class Util {
+public final class Util {
 
 	private static final double KELVIN_A_CELSIUS = 273.15d;
 	

@@ -3,7 +3,6 @@ package org.deiv.meteo.datos;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.deiv.meteo.Util;
 
 public class DatoPrevision12Km extends DatoPrevision4Km implements Serializable {
 

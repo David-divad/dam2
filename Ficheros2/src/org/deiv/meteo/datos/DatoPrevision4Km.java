@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
-import org.deiv.meteo.Util;
 import org.deiv.meteo.datos.campos.CampoViento;
 
-public class DatoPrevision4Km extends DatoMeteorologico implements Serializable {
+public class DatoPrevision4Km extends DatoMeteorologicoConFecha implements Serializable {
 	
 	private static final long serialVersionUID = -8491872952268123213L;
 	
@@ -51,6 +51,9 @@ public class DatoPrevision4Km extends DatoMeteorologico implements Serializable 
 		
 		/* formato de entrada: '2012-03-07T13:00:00Z' */
 		dt.applyPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		
+		/* pasamos de UTC a hora local */
+		dt.setTimeZone(TimeZone.getTimeZone("UTC"));
 		
 		try {
 			fecha = dt.parse(fechahora);
