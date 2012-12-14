@@ -6,6 +6,8 @@ import java.net.URL;
 /*
  * 4 - Programa en Java que recibe como argumento una URL y escribe en la salida estandar los
  *     atributos de dicha URL.
+ *        
+ *     David Suárez Rodríguez
  */
 public class Javanet_E04 {
 	

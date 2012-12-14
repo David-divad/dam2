@@ -14,6 +14,8 @@ import java.net.UnknownHostException;
  *     nombres de la maquina y el puerto de la maquina remota, asi como los de la maquina
  *     y el puerto desde donde de sonecte. El programa debe tratar las excepciones 
  *     UnknownHostException y SocketException.
+ *     
+ *     David Suárez Rodríguez
  */
 public class Javanet_E02 {
 	public static void main(String[] args)

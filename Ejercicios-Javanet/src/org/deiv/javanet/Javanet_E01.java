@@ -6,6 +6,8 @@ import java.net.UnknownHostException;
 /*
  * 1 - Programa en Java que recibe un nombre de dominio correspondiente a un ordenador
  *     e imprime en la salida estandar su direccion ip.
+ *     
+ *     David Suárez Rodríguez
  */
 
 public class Javanet_E01 {

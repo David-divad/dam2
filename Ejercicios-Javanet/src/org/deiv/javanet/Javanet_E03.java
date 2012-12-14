@@ -12,6 +12,8 @@ import java.net.UnknownHostException;
  * 3 - Programa en java que implementa un cliente que se conecta al servidor indicando la maquina donde
  *     se encuentra el servidor y el puerto 6000 por el que esta escuchando. Una vez conectado, lee una
  *     cadena del servidor y la escribe en la salida estandar.
+ *     
+ *     David Suárez Rodríguez
  */
 public class Javanet_E03 {
 	

@@ -11,6 +11,8 @@ import java.net.Socket;
  * 8 - Escribe una aplicacion cliente/servidor usando sockets orientados a conexion
  *     (Stream Sockets). El cliente envia dos enteros al servidor y el servidor le
  *     contesta con el resultado de la suma de dos enteros.
+ *     
+ *     David Suárez Rodríguez
  */
 public class Javanet_E08 {
 	

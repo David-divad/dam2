@@ -8,6 +8,8 @@ import java.net.URLConnection;
 /*
  * 6 - Programa en Java que recibe como argumento una URL y escribe la informacion de
  *     cabecera de esta URL en su salida estandar.
+ *     
+ *     David Suárez Rodríguez
  */
 public class Javanet_E06 {
 	

@@ -13,6 +13,8 @@ import java.net.URLConnection;
 /*
  * 7 - Programa en Java que recibe como argumento la URL de un objeto (grafico, imagen, audio)
  *     y lo guarda en un fichero.
+ * 
+ *     David Suárez Rodríguez
  */
 public class Javanet_E07 {
 	

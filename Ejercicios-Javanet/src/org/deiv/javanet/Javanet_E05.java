@@ -10,6 +10,8 @@ import java.net.URLConnection;
 /*
  * 5 - Programa en Java que recibe como argumento una URL y escribe en la salida estandar el
  *     contenido de dicha URL.
+ *     
+ *     David Suárez Rodríguez
  */
 public class Javanet_E05 {
 	
@@ -32,6 +34,7 @@ public class Javanet_E05 {
 			URLConnection conn = url.openConnection();
 			String contentType = conn.getContentType();
 			
+			/* solo imprimimos contenido con texto */
 			if(contentType.contains("text/html")) {
 				inStream = new InputStreamReader(conn.getInputStream());
 				buff = new BufferedReader(inStream);
